@@ -1,0 +1,12 @@
+[package]
+name = "pypathfinding"
+version = "4.9.1"
+edition = "2021"
+
+[lib]
+name = "pypathfinding"
+crate-type = ["cdylib"]
+
+[dependencies]
+pathfinding = "4.9.1"
+pyo3 = { version = "0.20.2", features = ["extension-module"] }
