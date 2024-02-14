@@ -1,4 +1,5 @@
-use crate::graph::{Graph, Pose};
+use crate::graph::Graph;
+use crate::pose::Pose;
 use ordered_float::OrderedFloat;
 use pathfinding::prelude::astar;
 use pyo3::pyfunction;

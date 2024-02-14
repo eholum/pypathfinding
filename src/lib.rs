@@ -1,5 +1,6 @@
 use pyo3::prelude::*;
 
+mod pose;
 mod graph;
 mod py_astar;
 
@@ -7,7 +8,7 @@ mod py_astar;
 #[pymodule]
 fn pypathfinding(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<graph::Graph>()?;
-    m.add_class::<graph::Pose>()?;
+    m.add_class::<pose::Pose>()?;
     m.add_function(wrap_pyfunction!(py_astar::py_astar, m)?)?;
     Ok(())
 }
