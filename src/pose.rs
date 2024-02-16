@@ -1,5 +1,6 @@
 use ordered_float::OrderedFloat;
 use pyo3::{pyclass, pymethods};
+use std::fmt;
 
 /// Simple pose class for storing x, y coordinates in the 2-D plane
 /// 
@@ -19,6 +20,12 @@ impl PartialEq for Pose {
 
 impl Eq for Pose {}
 
+impl fmt::Display for Pose {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
+
 #[pymethods]
 impl Pose {
     #[new]
@@ -28,6 +35,18 @@ impl Pose {
 
     pub fn get_coordinates(&self) -> (f64, f64) {
         (*self.x, *self.y)
+    }
+
+    pub fn print(&self) -> String {
+        self.to_string()
+    }
+
+    pub fn x(&self) -> f64 {
+        self.x.into_inner()
+    }
+
+    pub fn y(&self) -> f64 {
+        self.y.into_inner()
     }
 }
 

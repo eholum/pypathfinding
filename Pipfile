@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 maturin = "*"
 pytest = "*"
+pytest-codspeed = "*"
 
 [dev-packages]
 

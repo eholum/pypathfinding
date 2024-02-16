@@ -1,7 +1,7 @@
-import unittest
+import pytest
 from pypathfinding import Graph, Pose, py_astar
 
-class TestAStarAlgorithm(unittest.TestCase):
+class TestAStarAlgorithm():
     def test_astar_pathfinding_simple(self):
         # Create a graph instance
         g = Graph()
@@ -19,17 +19,15 @@ class TestAStarAlgorithm(unittest.TestCase):
         result = py_astar(start, goal, g)
 
         # Check that a path is found
-        self.assertIsNotNone(result, "A* did not find a path.")
+        assert result is not None, "A* did not find a path."
 
         # Unpack the result
         path, cost = result
         path = [p.get_coordinates() for p in path]
 
         # Check the path length and cost
-        self.assertEqual(path, [(0, 0), (1, 0)])
-        self.assertEqual(len(path), 2)
-        self.assertAlmostEqual(cost, 1.0, delta=0.01)
-
+        assert path == [(0, 0), (1, 0)]
+        assert cost == pytest.approx(1, 0.001)
 
     def test_astar_pathfinding_harder(self):
          # Create a graph instance
@@ -60,17 +58,12 @@ class TestAStarAlgorithm(unittest.TestCase):
         result = py_astar(start, goal, g)
 
         # Check that a path is found
-        self.assertIsNotNone(result, "A* did not find a path.")
+        assert result is not None, "A* did not find a path."
 
         # Unpack the result
         path, cost = result
         path = [p.get_coordinates() for p in path]
 
         # Check the path length and cost
-        self.assertEqual(path, [(0.0, 0.0), (0.0, 1.0), (0.0, 2.0), (1.0, 2.0), (2.0, 2.0), (2.0, 3.0)])
-        self.assertEqual(len(path), 6)
-        self.assertAlmostEqual(cost, 5.0, delta=0.01)
-
-
-if __name__ == '__main__':
-    unittest.main()
+        assert path == [(0.0, 0.0), (0.0, 1.0), (0.0, 2.0), (1.0, 2.0), (2.0, 2.0), (2.0, 3.0)]
+        assert cost == pytest.approx(5, 0.001)
