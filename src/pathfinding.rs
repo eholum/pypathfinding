@@ -2,6 +2,7 @@ use crate::graph::Graph;
 use crate::pose::Pose;
 use ordered_float::OrderedFloat;
 use pathfinding::prelude::astar;
+use pathfinding::prelude::dijkstra;
 use pyo3::prelude::PyResult;
 use pyo3::pyfunction;
 
@@ -16,6 +17,17 @@ pub fn py_astar(start: &Pose, goal: &Pose, g: &Graph) -> PyResult<Option<(Vec<Po
     let success_func = |node: &Pose| -> bool { node == goal };
 
     let result = astar(start, successors_func, heuristic_func, success_func);
+
+    Ok(result.map(|(path, cost)| (path, cost.into_inner())))
+}
+
+#[pyfunction]
+pub fn py_dijkstra(start: &Pose, goal: &Pose, g: &Graph) -> PyResult<Option<(Vec<Pose>, f64)>> {
+    let successors_func = |node: &Pose| -> Vec<(Pose, OrderedFloat<f64>)> { g.successors(node) };
+
+    let success_func = |node: &Pose| -> bool { node == goal };
+
+    let result = dijkstra(start, successors_func, success_func);
 
     Ok(result.map(|(path, cost)| (path, cost.into_inner())))
 }

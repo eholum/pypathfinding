@@ -1,5 +1,5 @@
 import pytest
-from pypathfinding import Graph, Pose, py_astar
+from pypathfinding import Graph, Pose, py_astar, py_dijkstra
 
 def build_graph(n: int):
     """Return an nxn fully connected graph"""
@@ -16,7 +16,7 @@ def build_graph(n: int):
     return g
 
 def test_corner_to_corner_a_star(benchmark):
-    n = 500
+    n = 100
     g = build_graph(n + 1)
     start = Pose(0, 0)
     goal = Pose(n, n)
@@ -24,4 +24,15 @@ def test_corner_to_corner_a_star(benchmark):
     @benchmark
     def bench():
         result = py_astar(start, goal, g)
+        assert result is not None, "A* did not find a path."
+
+def test_corner_to_corner_dijkstra(benchmark):
+    n = 100
+    g = build_graph(n + 1)
+    start = Pose(0, 0)
+    goal = Pose(n, n)
+
+    @benchmark
+    def bench():
+        result = py_dijkstra(start, goal, g)
         assert result is not None, "A* did not find a path."
