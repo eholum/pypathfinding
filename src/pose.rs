@@ -3,7 +3,7 @@ use pyo3::{pyclass, pymethods};
 use std::fmt;
 
 /// Simple pose class for storing x, y coordinates in the 2-D plane
-/// 
+///
 /// Wraps the f64 primitive with OrderedFloat to support required interfaces from pathfinding.
 #[pyclass]
 #[derive(Clone, Hash)]
@@ -30,7 +30,10 @@ impl fmt::Display for Pose {
 impl Pose {
     #[new]
     pub fn new(x: f64, y: f64) -> Self {
-        Pose { x: OrderedFloat(x), y: OrderedFloat(y) }
+        Pose {
+            x: OrderedFloat(x),
+            y: OrderedFloat(y),
+        }
     }
 
     pub fn get_coordinates(&self) -> (f64, f64) {

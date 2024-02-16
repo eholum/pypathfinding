@@ -3,7 +3,6 @@ use ordered_float::OrderedFloat;
 use pyo3::{pyclass, pymethods};
 use std::collections::HashMap;
 
-
 /// Basic graph class where nodes are points on the 2-D plane.
 #[pyclass]
 pub struct Graph {

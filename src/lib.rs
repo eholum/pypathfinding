@@ -1,7 +1,7 @@
 use pyo3::prelude::*;
 
-mod pose;
 mod graph;
+mod pose;
 mod py_astar;
 
 /// A Python module implemented in Rust.
