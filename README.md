@@ -13,10 +13,10 @@ Assuming you have cargo and pipenv installed, then from the repo root:
 $ pipenv install
 
 # Build
-$ pipenv maturin develop
+$ pipenv run maturin develop
 
 # Run tests
-$ pipenv run pytest tests/
+$ pipenv run pytest test/
 
 # Run benchmarks
 $ pipenv run pytest benches/
